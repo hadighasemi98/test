@@ -31,7 +31,7 @@ class Route {
         $action     = $argument[1] ?? null;
         $middleware = $argument[2] ?? null;
         
-        self::add($name ,$uri , $action , $middleware);
+        self::add(method: $name ,uri: $uri , action: $action , middleware: $middleware);
     }    
   
 

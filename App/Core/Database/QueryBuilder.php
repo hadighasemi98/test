@@ -1,37 +1,55 @@
 <?php
 
-class QueryBuilder
-{
-    private string $table;
+namespace App\Core\Database;
 
-    public function __construct(protected $pdo)
+class QueryBuilder {
+
+    protected $table ;
+    protected $attributes = [] ;
+    protected $primary_key ;
+
+    public function __construct(protected $connection)
     {
+
     }
 
-    public function selectAll()
+    public function create(array $data): bool
     {
-        $query = $this->pdo->prepare("select * from {$this->table}");
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_OBJ);
+        $this->connection->insert($this->table,$data);
+        return true;
     }
 
-    public function find(int $id): object
+    public function find(int $id, string|array $columns): object
     {
-        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id={$id}");
-        $query->execute();
-        return $query->fetch(PDO::FETCH_OBJ);
+        $sql = $this->connection->get($this->table, $columns ?? '*', [$this->primary_key => $id]);
+
+        foreach ($sql as $col => $val) {
+            $this->attributes[$col] = $val;
+        }
+        return $this ;
     }
 
-    public function where(string $key, $value)
+    public function get(array $columns , array $where): array
     {
-        $query = $this->pdo->prepare("select * from {$this->table} where $key= '$value'");
-        $query->execute();
-        return $query->fetch(PDO::FETCH_OBJ);
+        return $this->connection->select($this->table, $columns, $where) ;
     }
 
-    public function table(string $table): static
+    public function all(): array
     {
-        $this->table = $table;
-        return $this;
+        return  $this->connection->select($this->table, '*') ;
+
+    }
+
+    public function update(array $data , array $where): int
+    {
+        $sql = $this->connection->update($this->table, $data, $where);
+        return $sql->rowCount() ;
+
+    }
+    
+    public function delete(array $where): int
+    {
+        $sql = $this->connection->delete($this->table, $where);
+        return $sql->rowCount() ;
     }
 }
