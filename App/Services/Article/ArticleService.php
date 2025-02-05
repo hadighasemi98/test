@@ -1,9 +1,11 @@
 <?php
 
+use App\Core\Database\DB;
+
 class ArticleService 
 {
-    public static function search() {
-        $pdo = Database::connect();
+    public function search() {
+        
         $query = $_GET['q'] ?? '';
 
         if (!$query) {

@@ -4,7 +4,7 @@ namespace App\Core\Database;
 use PDO;
 use PDOException;
 
-class Connection {
+class DB {
     private static ?PDO $connection = null;
 
     public static function connect(): PDO {
