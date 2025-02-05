@@ -1,11 +1,8 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+use App\Core\Router\Router;
 
-use App\Core\Database\Connection;
-use Dotenv\Dotenv;
+include "Bootstrap/init.php";
 
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-$c = new Connection();
+$new = new Router();
+$new->run()  ;

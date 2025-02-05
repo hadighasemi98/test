@@ -1,13 +1,11 @@
 <?php
 
-use App\Core\Routing\Route;
+use App\Core\Router\Route;
 
 
 Route::get("/null"); 
 
 Route::get("/","HomeController@index" )  ; 
-
-// Route::get("/post/{slug}" ,"PostController@get" ) ; 
 
 
 

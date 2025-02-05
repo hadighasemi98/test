@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Routing;
+namespace App\Core\Router;
 
 use Exception;
 
@@ -22,7 +22,6 @@ class Route {
 
     public static function __callStatic($name , $argument)
     {
-
         if ( !in_array($name , self::HTTP_VERB) ){
             throw new Exception ("Http verb not supported") ;
         }
@@ -32,8 +31,7 @@ class Route {
         $middleware = $argument[2] ?? null;
         
         self::add(method: $name ,uri: $uri , action: $action , middleware: $middleware);
-    }    
-  
+    }
 
     public static function routes()
     {
