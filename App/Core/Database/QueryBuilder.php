@@ -8,10 +8,7 @@ class QueryBuilder {
     protected $attributes = [] ;
     protected $primary_key ;
 
-    public function __construct(protected $connection)
-    {
-
-    }
+    public function __construct(protected $connection){}
 
     public function create(array $data): bool
     {
@@ -37,14 +34,12 @@ class QueryBuilder {
     public function all(): array
     {
         return  $this->connection->select($this->table, '*') ;
-
     }
 
     public function update(array $data , array $where): int
     {
         $sql = $this->connection->update($this->table, $data, $where);
         return $sql->rowCount() ;
-
     }
     
     public function delete(array $where): int

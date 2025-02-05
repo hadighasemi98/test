@@ -134,16 +134,16 @@ class Router
         # ['Controller','index']
         if(is_array($action)){
 
-            $className = "App\\Controllers\\" . $action[0];
+            $className = "App\\Http\\Controllers\\" . $action[0];
             if(!class_exists($className)){
-                throw new Exception("Class not exist");
+                throw new Exception("Class not exist $className");
             }
                 
             $controller = new $className();
             
             $methodName = $action[1];
             if(!method_exists($controller ,$methodName))
-                throw new Exception("Method not exist");
+                throw new Exception("Method not exist $methodName");
 
             $controller->{$methodName}();
         }

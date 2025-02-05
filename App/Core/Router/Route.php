@@ -3,7 +3,8 @@ namespace App\Core\Router;
 
 use Exception;
 
-class Route {
+class Route 
+{
 
     private static $routes = [];
     private const HTTP_VERB = ["get","post","put","patch","delete","options"];

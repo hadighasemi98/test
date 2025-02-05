@@ -3,9 +3,11 @@
 use App\Core\Router\Route;
 
 
-Route::get("/null"); 
+Route::get("/test", function (){
+        echo "123123";
+});
 
-Route::get("/","HomeController@index" )  ; 
+Route::get("/article","ArticleController@index" )  ; 
 
 
 

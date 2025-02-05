@@ -9,5 +9,5 @@ $dotenv->load();
 
 $request = new App\Core\Request();
 
-include BASE_PATH . "Helpers/helpers.php";  
+include BASE_PATH . "helpers/helpers.php";  
 include BASE_PATH . "Routes/web.php";
