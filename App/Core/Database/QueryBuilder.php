@@ -33,7 +33,7 @@ class QueryBuilder {
 
     public function all(): array
     {
-        return  $this->connection->select($this->table, '*') ;
+        return $this->connection->select($this->table, '*') ;
     }
 
     public function update(array $data , array $where): int

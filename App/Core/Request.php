@@ -1,9 +1,6 @@
 <?php
 namespace App\Core;
 
-use App\Middlewares\GlobalMiddleware;
-use hisorange\BrowserDetect\Parser as Browser;
-
 
 class Request {
 
@@ -23,9 +20,9 @@ class Request {
         $this->method = strtolower($_SERVER['REQUEST_METHOD']) ;
     }
 
-    public function __get(string $param): mixed
+    public function __get(string $param)
     {
-        if (array_key_exists($param, $this->params)) {
+        if (array_key_exists(key: $param, array: $this->params)) {
             return $this->params[$param];
         }
     }
