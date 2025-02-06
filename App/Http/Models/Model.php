@@ -2,14 +2,17 @@
 namespace App\Http\Models;
 
 use App\Core\Database\DB;
+use App\Core\Database\QueryBuilder;
 
 abstract class Model
 {
+    // ToDo: Implement base model
+
+    public QueryBuilder $db ;
     public function __construct()
     {
-        $pdo = DB::connect();
+        $this->db = new QueryBuilder(connection: DB::connect());
     }
 
-    abstract public function table(): string;
-    // ToDo: Implement base model
+    abstract public function table(): void;
 }

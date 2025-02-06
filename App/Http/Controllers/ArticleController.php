@@ -20,6 +20,6 @@ class ArticleController
 
     public function search(Request $request) 
     {
-        return $this->articleService->search($request);
+        return $this->articleService->search($request->getRouteParam('title'));
     }
 }

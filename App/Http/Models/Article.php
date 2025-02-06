@@ -8,8 +8,9 @@ class Article extends Model
         echo "Article model";
     }
 
-    public function table(): string
+    public function table(): void
     {
-        return "articles";
+        $this->db->table('articles');
     }
+
 }

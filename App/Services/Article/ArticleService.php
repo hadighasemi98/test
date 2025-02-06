@@ -1,21 +1,17 @@
 <?php
 
 use App\Core\Database\DB;
+use App\Http\Models\Article;
 
 class ArticleService 
 {
-    public function search() {
-        
-        $query = $_GET['q'] ?? '';
-
+    public function search(string $query) 
+    {
         if (!$query) {
             return json_encode(["error" => "Missing search query"]);
         }
 
-        $stmt = $pdo->prepare("SELECT id, title, content, created_at FROM articles 
-                                WHERE MATCH(title, content) AGAINST (:query IN NATURAL LANGUAGE MODE)");
-        $stmt->execute(['query' => $query]);
-        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $articles = (new Article())->db->search(column: 'title',query: $query); ;
 
         return json_encode(["articles" => $articles]);
     }
